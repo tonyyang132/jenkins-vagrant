@@ -1,0 +1,27 @@
+---
+
+- apt:
+    autoremove: yes
+    cache_valid_time: 3600
+    name: python-pip
+    state: latest
+    update_cache: yes
+
+# Install jjb with pip instead of apt. The apt version with Ubuntu 16.04
+# works fine, but the one with Ubuntu 14.04 would suffer from authentication
+# errors as it's not up-to-date.
+- pip:
+    name: jenkins-job-builder
+    state: latest
+
+- file:
+    path: /etc/jenkins_jobs
+    state: directory
+
+- template:
+    backup: yes
+    dest: /etc/jenkins_jobs/jenkins_jobs.ini
+    force: yes
+    src: /vagrant/roles/jjb/templates/jenkins_jobs.ini-sample
+
+...

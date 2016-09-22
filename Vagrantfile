@@ -64,13 +64,9 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-    sudo touch /vagrant_provisioned
-    wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
-    sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-    sudo apt-get update
-    sudo apt-get --yes dist-upgrade
-    sudo apt-get --yes install jenkins jenkins-job-builder
-    sudo apt-get --yes --purge autoremove
-  SHELL
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.install = true
+    ansible.playbook = "site.yml"
+    ansible.sudo = true
+  end
 end

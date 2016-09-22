@@ -1,0 +1,18 @@
+---
+
+- name: prepare os
+  hosts: all
+  roles:
+    - os
+
+- name: install jenkins
+  hosts: all
+  roles:
+    - jenkins
+
+- name: install jenkins job builder
+  hosts: all
+  roles:
+    - jjb
+
+...
