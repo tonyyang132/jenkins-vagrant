@@ -5,6 +5,11 @@
   roles:
     - os
 
+- name: install vim
+  hosts: all
+  roles:
+    - vim
+
 - name: install jenkins
   hosts: all
   roles:

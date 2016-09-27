@@ -1,0 +1,24 @@
+---
+
+- apt:
+    autoremove: yes
+    cache_valid_time: 3600
+    name: vim
+    state: latest
+    update_cache: yes
+
+- lineinfile:
+    backup: yes
+    create: yes
+    dest: /home/vagrant/.vimrc
+    group: vagrant
+    owner: vagrant
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - set hlsearch
+    - set incsearch
+    - set ignorecase
+    - set smartcase
+
+...
