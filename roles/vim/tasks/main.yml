@@ -10,9 +10,9 @@
 - lineinfile:
     backup: yes
     create: yes
-    dest: /home/vagrant/.vimrc
-    group: vagrant
-    owner: vagrant
+    dest: /home/ubuntu/.vimrc
+    group: ubuntu
+    owner: ubuntu
     line: "{{ item }}"
     state: present
   with_items:
